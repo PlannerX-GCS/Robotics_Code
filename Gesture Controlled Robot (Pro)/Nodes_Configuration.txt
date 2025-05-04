@@ -1,0 +1,1 @@
+Left DC Motor A1 @A,Left DC Motor A2 @B,Right DC Motor B1 @C,Right DC Motor B2 @D,Left DC Motor Speed @E,Right DC Motor Speed @F,Left IR @G,Right IR @H,Trig @I,Echo @J,No Connection @K,No Connection @L,No Connection @M
