@@ -110,8 +110,6 @@ def robot_node_mapping():
                                                             
     return LEFT_IR, RIGHT_IR, LEFT_MOTORS, RIGHT_MOTORS, LEFT_MOTOR_SPEED, RIGHT_MOTOR_SPEED, ECHO, TRIGGER, SERVO, RGB_RED, RGB_BLUE, RGB_GREEN, RGB_SINGLE, LDR, KEYPAD_C1, KEYPAD_C2, KEYPAD_C3, KEYPAD_C4, KEYPAD_R1, KEYPAD_R2, KEYPAD_R3, KEYPAD_R4, JOYSTICK_LR, JOYSTICK_UD, JOYSTICK_SW, SOIL_SENSOR
 
-print(robot_node_mapping())
-
 def set_servo_angle(pwm, angle, min_angle=None, max_angle=None):
     # If min_angle or max_angle is None, use default values
     min_angle = min_angle if min_angle is not None else 0
