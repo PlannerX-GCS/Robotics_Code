@@ -7,9 +7,9 @@ start_time_left = None
 start_time_right = None
 obstacle_trigger_time = None
 
-flicker_lcd(1, 0.1):
+flicker_lcd(1, 0.1)
     
-write_on_lcd("Initializing Robot", 0, 0):
+write_on_lcd("Initializing Robot", 0, 0)
 sleep(2)
 lcd.clear()
 
@@ -19,7 +19,7 @@ while True:
     ir_right = read_right_ir() 
     distance = obstacle_distance()
         
-    write_on_lcd("Awaiting Gesture", 0, 0):
+    write_on_lcd("Awaiting Gesture", 0, 0)
     
     robot_stop()
 
