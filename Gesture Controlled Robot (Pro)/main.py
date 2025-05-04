@@ -18,7 +18,8 @@ while True:
     ir_left = read_left_ir() 
     ir_right = read_right_ir() 
     distance = obstacle_distance()
-        
+
+    lcd.clear()
     write_on_lcd("Begin Gesture", 0, 0)
     
     robot_stop()
@@ -30,6 +31,7 @@ while True:
         elapsed_time = ticks_diff(ticks_ms(), obstacle_trigger_time)
 
         if 25 <= distance <= 40 and elapsed_time <= 1000:
+            lcd.clear()
             write_on_lcd("Forward Gesture", 0, 0)
             robot_forward(1, 1)
             sleep(2)
@@ -45,6 +47,7 @@ while True:
         elapsed_time = ticks_diff(ticks_ms(), start_time_left)
 
         if ir_right == 0 and elapsed_time <= 1000:
+            lcd.clear()
             write_on_lcd("Left Gesture", 0, 0)
             robot_axis_left(1, 1)  
             sleep(2)  # Give time for the action
@@ -62,6 +65,7 @@ while True:
         elapsed_time = ticks_diff(ticks_ms(), start_time_right)
 
         if ir_left == 0 and elapsed_time <= 1000:
+            lcd.clear()
             write_on_lcd("Right Gesture", 0, 0)
             robot_axis_right(1, 1)  
             sleep(2) 
