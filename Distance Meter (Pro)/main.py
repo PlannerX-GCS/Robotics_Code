@@ -1,5 +1,5 @@
 from time import sleep
-from ROBOT_ACTIONS import obstacle_distance
+from ROBOT_ACTIONS import *
 
 flicker_lcd(1, 0.1) 
 
