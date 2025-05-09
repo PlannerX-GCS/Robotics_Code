@@ -17,6 +17,6 @@ while True:
     else:
         prev_distance = distance
         write_on_lcd(distance, 0, 0 )
-    sleep(0.2)
+    sleep(0.002)
     lcd.clear()
     
