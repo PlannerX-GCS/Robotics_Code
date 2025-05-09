@@ -1,76 +1,22 @@
-from time import ticks_ms, ticks_diff, sleep
-from machine import I2C, Pin
+from time import sleep
+from ROBOT_ACTIONS import obstacle_distance
 
-from ROBOT_ACTIONS import *
+flicker_lcd(1, 0.1) #Initialises your LCD Screen with an flickering animation (First value (1) is total flicker time, and Second Value (0.1) is time interval at which flickering happens)
 
-start_time_left = None
-start_time_right = None
-obstacle_trigger_time = None
-
-flicker_lcd(1, 0.1)
-    
-write_on_lcd("Starting Robot", 0, 0)
+write_on_lcd("Initialising", 0, 0 )
 sleep(2)
 lcd.clear()
 
+prev_distance = 0
+
 while True:
     data_stream("USB")
-    ir_left = read_left_ir() 
-    ir_right = read_right_ir() 
     distance = obstacle_distance()
-
+    if distance == -1:
+        te_on_lcd(prev_distance, 0, 0 )
+    else:
+        prev_distance = distance
+        te_on_lcd(distance, 0, 0 )
+    sleep(0.2)
     lcd.clear()
-    write_on_lcd("Begin Gesture", 0, 0)
     
-    robot_stop()
-
-    if distance<15 and obstacle_trigger_time is None:
-        obstacle_trigger_time = ticks_ms()
-
-    if obstacle_trigger_time is not None:
-        elapsed_time = ticks_diff(ticks_ms(), obstacle_trigger_time)
-
-        if 25 <= distance <= 40 and elapsed_time <= 1000:
-            lcd.clear()
-            write_on_lcd("Forward Gesture", 0, 0)
-            robot_forward(1, 1)
-            sleep(2)
-            obstacle_trigger_time = None
-        elif elapsed_time > 1000:
-            obstacle_trigger_time = None
-
-    
-    if ir_left == 0 and start_time_left is None:
-        start_time_left = ticks_ms() 
-
-    if start_time_left is not None:
-        elapsed_time = ticks_diff(ticks_ms(), start_time_left)
-
-        if ir_right == 0 and elapsed_time <= 1000:
-            lcd.clear()
-            write_on_lcd("Left Gesture", 0, 0)
-            robot_axis_left(1, 1)  
-            sleep(2)  # Give time for the action
-            start_time_left = None  
-        elif elapsed_time > 1000:
-            start_time_left = None  
-    
-    ir_left = read_left_ir()   
-    ir_right = read_right_ir()  
-
-    if ir_right == 0 and start_time_right is None:
-        start_time_right = ticks_ms()  
-
-    if start_time_right is not None:
-        elapsed_time = ticks_diff(ticks_ms(), start_time_right)
-
-        if ir_left == 0 and elapsed_time <= 1000:
-            lcd.clear()
-            write_on_lcd("Right Gesture", 0, 0)
-            robot_axis_right(1, 1)  
-            sleep(2) 
-            start_time_right = None 
-        elif elapsed_time > 1000:
-            start_time_right = None  
-
-    sleep(0.0001)
