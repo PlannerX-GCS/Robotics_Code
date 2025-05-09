@@ -1,76 +1,60 @@
-from time import ticks_ms, ticks_diff, sleep
-from machine import I2C, Pin
-
 from ROBOT_ACTIONS import *
+from machine import Pin, PWM
+import time
 
-start_time_left = None
-start_time_right = None
-obstacle_trigger_time = None
+base_speed = float(0.8) #Keep it 0.8 or higher (max is 1.0, min is 0.0)
+turn_speed = float(0.5) #Keep it greater than 0.35 and lesser than base speed (max is 1.0, min is 0.35)
+follow_black_line = True #Make True if robot needs to follow black line, to follow white line keep False
+ action_at_off_line = "Stop" #This can be "Take U-Turn", "Take Left", "Take Right" or "Stop", depending on what you want the robot to do when both sensors are off the line
 
-flicker_lcd(1, 0.1)
-    
-write_on_lcd("Starting Robot", 0, 0)
-sleep(2)
-lcd.clear()
+
+def off_line_action():
+    if action_at_off_line == "Take U-Turn":
+        robot_axis_right(base_speed, base_speed)
+        time.sleep(0)
+        
+    elif action_at_off_line == "Take Left":
+        robot_axis_left(base_speed, base_speed)
+        time.sleep(0.0)
+        
+    elif action_at_off_line == "Take Right":
+        robot_axis_right(base_speed, base_speed)
+        time.sleep(0.0)
+        
+    elif action_at_off_line == "Stop":
+        robot_stop()
+
+    else:
+        pass
 
 while True:
     data_stream("USB")
-    ir_left = read_left_ir() 
-    ir_right = read_right_ir() 
-    distance = obstacle_distance()
-
-    lcd.clear()
-    write_on_lcd("Begin Gesture", 0, 0)
     
-    robot_stop()
-
-    if distance<15 and obstacle_trigger_time is None:
-        obstacle_trigger_time = ticks_ms()
-
-    if obstacle_trigger_time is not None:
-        elapsed_time = ticks_diff(ticks_ms(), obstacle_trigger_time)
-
-        if 25 <= distance <= 40 and elapsed_time <= 1000:
-            lcd.clear()
-            write_on_lcd("Forward Gesture", 0, 0)
-            robot_forward(1, 1)
-            sleep(2)
-            obstacle_trigger_time = None
-        elif elapsed_time > 1000:
-            obstacle_trigger_time = None
-
+    left_value = int(read_left_ir())
+    right_value = int(read_right_ir())
+        
+    if follow_black_line == True:
+        if left_value and not right_value:
+            robot_forward(base_speed, turn_speed)
+        elif right_value and not left_value:
+            robot_forward(turn_speed, base_speed)
+        elif left_value and right_value:
+            off_line_action()
+            integral = 0
+        else:
+            robot_forward(base_speed, base_speed)
     
-    if ir_left == 0 and start_time_left is None:
-        start_time_left = ticks_ms() 
-
-    if start_time_left is not None:
-        elapsed_time = ticks_diff(ticks_ms(), start_time_left)
-
-        if ir_right == 0 and elapsed_time <= 1000:
-            lcd.clear()
-            write_on_lcd("Left Gesture", 0, 0)
-            robot_axis_left(1, 1)  
-            sleep(2)  # Give time for the action
-            start_time_left = None  
-        elif elapsed_time > 1000:
-            start_time_left = None  
+    if follow_black_line == False:
+        if not left_value and right_value:
+            robot_forward(base_speed, turn_speed)
+        elif not right_value and left_value:
+            robot_forward(turn_speed, base_speed)
+        elif not left_value and not right_value:
+            off_line_action()
+            integral = 0
+        else:
+            robot_forward(base_speed, base_speed)
     
-    ir_left = read_left_ir()   
-    ir_right = read_right_ir()  
+    time.sleep(0.00000001)
 
-    if ir_right == 0 and start_time_right is None:
-        start_time_right = ticks_ms()  
 
-    if start_time_right is not None:
-        elapsed_time = ticks_diff(ticks_ms(), start_time_right)
-
-        if ir_left == 0 and elapsed_time <= 1000:
-            lcd.clear()
-            write_on_lcd("Right Gesture", 0, 0)
-            robot_axis_right(1, 1)  
-            sleep(2) 
-            start_time_right = None 
-        elif elapsed_time > 1000:
-            start_time_right = None  
-
-    sleep(0.0001)
