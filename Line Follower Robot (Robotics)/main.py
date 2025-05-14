@@ -1,6 +1,6 @@
 from ROBOT_ACTIONS import *
 from machine import Pin, PWM
-import time
+from time import *
 
 base_speed = float(0.8) #Keep it 0.8 or higher (max is 1.0, min is 0.0)
 turn_speed = float(0.5) #Keep it greater than 0.35 and lesser than base speed (max is 1.0, min is 0.35)
