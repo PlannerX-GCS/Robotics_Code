@@ -5,7 +5,7 @@ flicker_lcd(1, 0.1)
 
 write_on_lcd("Initialising", 0, 0 )
 sleep(2)
-lcd.clear()
+clean_lcd()
 
 prev_distance = 0
 
@@ -18,5 +18,5 @@ while True:
         prev_distance = distance
         write_on_lcd(distance, 0, 0 )
     sleep(0.002)
-    lcd.clear()
+    clean_lcd()
     
