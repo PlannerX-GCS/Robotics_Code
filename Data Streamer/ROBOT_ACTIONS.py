@@ -246,7 +246,9 @@ def flicker_lcd(startup_time, time_interval):
 def write_on_lcd(text, line_number, character_number):
     lcd.move_to(character_number, line_number)
     lcd.putstr(str(text))
-    
+
+def clean_lcd():
+    lcd.clear()  
 
 def data_stream(type):
     if type == "USB":
