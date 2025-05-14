@@ -11,7 +11,7 @@ flicker_lcd(1, 0.1)
     
 write_on_lcd("Starting Robot", 0, 0)
 sleep(2)
-lcd.clear()
+clean_lcd()
 
 while True:
     data_stream("USB")
@@ -19,7 +19,8 @@ while True:
     ir_right = read_right_ir() 
     distance = obstacle_distance()
 
-    lcd.clear()
+    clean_lcd()
+    
     write_on_lcd("Begin Gesture", 0, 0)
     
     robot_stop()
@@ -31,7 +32,7 @@ while True:
         elapsed_time = ticks_diff(ticks_ms(), obstacle_trigger_time)
 
         if 25 <= distance <= 40 and elapsed_time <= 1000:
-            lcd.clear()
+            clean_lcd()
             write_on_lcd("Forward Gesture", 0, 0)
             robot_forward(1, 1)
             sleep(2)
@@ -47,7 +48,7 @@ while True:
         elapsed_time = ticks_diff(ticks_ms(), start_time_left)
 
         if ir_right == 0 and elapsed_time <= 1000:
-            lcd.clear()
+            clean_lcd()
             write_on_lcd("Left Gesture", 0, 0)
             robot_axis_left(1, 1)  
             sleep(2)  # Give time for the action
@@ -65,7 +66,7 @@ while True:
         elapsed_time = ticks_diff(ticks_ms(), start_time_right)
 
         if ir_left == 0 and elapsed_time <= 1000:
-            lcd.clear()
+            clean_lcd()
             write_on_lcd("Right Gesture", 0, 0)
             robot_axis_right(1, 1)  
             sleep(2) 
