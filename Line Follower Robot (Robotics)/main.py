@@ -5,7 +5,7 @@ import time
 base_speed = float(0.8) #Keep it 0.8 or higher (max is 1.0, min is 0.0)
 turn_speed = float(0.5) #Keep it greater than 0.35 and lesser than base speed (max is 1.0, min is 0.35)
 follow_black_line = True #Make True if robot needs to follow black line, to follow white line keep False
- action_at_off_line = "Stop" #This can be "Take U-Turn", "Take Left", "Take Right" or "Stop", depending on what you want the robot to do when both sensors are off the line
+action_at_off_line = "Stop" #This can be "Take U-Turn", "Take Left", "Take Right" or "Stop", depending on what you want the robot to do when both sensors are off the line
 
 
 def off_line_action():
