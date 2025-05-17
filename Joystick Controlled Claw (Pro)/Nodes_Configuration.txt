@@ -1,0 +1,2 @@
+Servo @A,Servo @B,Joystick X @C,Joystick Y @D,Joystick Switch @E,Right DC Motor Speed @F,Left IR @G,Right IR @H,Trig @I,Echo @J,No Connection @K,No Connection @L,No Connection @M
+
