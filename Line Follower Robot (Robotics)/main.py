@@ -55,6 +55,6 @@ while True:
         else:
             robot_forward(base_speed, base_speed)
     
-    time.sleep(0.00000001)
+    sleep(0.00000001)
 
 
