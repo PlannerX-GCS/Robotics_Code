@@ -34,14 +34,16 @@ def detect_accident():
             delta_roll = abs(roll - prev_roll)
 
             if delta_pitch > PITCH_THRESHOLD or delta_roll > ROLL_THRESHOLD:
+                xlean_lcd()
                 damage = calculate_damage(pitch, roll)
                 display_accident_alert(damage)
                 log_impact(pitch, roll, damage)
                 sleep(ACCIDENT_HOLD_TIME)
+
+            else:
                 clean_lcd()
-            
-            write_on_lcd("Detecting", 0, 0)
-            prev_pitch, prev_roll = pitch, roll
+                write_on_lcd("Detecting", 0, 0)
+                prev_pitch, prev_roll = pitch, roll
 
         sleep(CHECK_INTERVAL)
 
