@@ -39,8 +39,8 @@ while True:
         prev_pres = pres_hPa
 
     else: 
-        line1 = "Sensor Error!"
-        line2 = "Check Wiring!"
+        line1 = ""
+        line2 = ""
 
     write_on_lcd(line1, 0, 0) 
     write_on_lcd(line2, 1, 0) 
