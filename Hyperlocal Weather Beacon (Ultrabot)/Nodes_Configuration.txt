@@ -1,1 +1,0 @@
-Joystick Switch @A,Joystick X @B,Joystick Y @C,No Connection @D,No Connection @E,No Connection @F,No Connection @G,No Connection @H,No Connection @I,No Connection @J,No Connection @K,No Connection @L,No Connection @M
