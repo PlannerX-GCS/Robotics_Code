@@ -257,9 +257,9 @@ def data_stream(type):
     if type == "USB":
         ax, ay, az, gx, gy, gz, error_code, pitch, roll, tempC, pres_hPa, altitude, battery_voltage = internal_sensor_datas()
         left_ir_value, right_ir_value, distance, latitude, longitude, satellites = external_sensor_datas()
-        mac_suffix = get_mac_address()
+        #mac_suffix = get_mac_address()
         
-        data = [ax, ay, az, gx, gy, gz, error_code, pitch, roll, tempC, pres_hPa, altitude,left_ir_value, right_ir_value, distance, latitude, longitude, satellites, battery_voltage, mac_suffix]
+        data = [ax, ay, az, gx, gy, gz, error_code, pitch, roll, tempC, pres_hPa, altitude,left_ir_value, right_ir_value, distance, latitude, longitude, satellites, battery_voltage]
         #print(data)
         return data
         
