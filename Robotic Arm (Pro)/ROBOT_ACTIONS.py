@@ -22,7 +22,7 @@ RIGHT_MOTOR_SPEED_PINS = [machine.Pin(int(pin), machine.Pin.OUT) for pin in RIGH
 ECHO_PINS = [machine.Pin(int(pin), machine.Pin.IN) for pin in ECHO if pin]
 TRIGGER_PINS = [machine.Pin(int(pin), machine.Pin.OUT) for pin in TRIGGER if pin]
 
-SERVO_PINS = [machine.Pin(int(pin), machine.Pin.OUT) for pin in SERVO if pin]
+SERVO_PINS = [PWM(Pin(int(pin))) for pin in SERVO if pin]
 
 RGB_RED_PINS = [machine.Pin(int(pin), machine.Pin.OUT) for pin in RGB_RED if pin]
 RGB_BLUE_PINS = [machine.Pin(int(pin), machine.Pin.OUT) for pin in RGB_BLUE if pin]
