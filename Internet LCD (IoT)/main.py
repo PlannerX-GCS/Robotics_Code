@@ -26,7 +26,7 @@ html_page = (
 send("AT+RST", 2)
 send("ATE0", 1)
 send("AT+CWMODE=2", 1)
-send('AT+CWSAP="PicoNet","12345678",5,3', 3)
+send('AT+CWSAP="Safear Robotics","12345678",5,3', 3)
 send("AT+CIPMUX=1", 1)
 send("AT+CIPSERVER=1,80", 1)
 
@@ -70,7 +70,7 @@ while True:
                         msg = extract_msg(line)
                         if msg:
                             clean_lcd()
-                            write_on_lcd("Message:", 0, 0)
+                            write_on_lcd(">>192.168.4.1", 0, 0)
                             write_on_lcd(msg[:16], 1, 0)
                         send_http_response(conn_id)
                 buffer = ""
