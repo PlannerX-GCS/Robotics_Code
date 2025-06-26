@@ -57,6 +57,9 @@ def send_http_response(conn_id):
 
 buffer = ""
 
+write_on_lcd("Initializing", 0, 0)
+sleep(1)
+write_on_lcd(">>192.168.4.1", 0, 0)
 
 while True:
     if esp.any():
