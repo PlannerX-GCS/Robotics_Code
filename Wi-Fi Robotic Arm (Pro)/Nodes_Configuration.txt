@@ -1,0 +1,1 @@
+Servo @A,Servo @B,Joystick X @C,Joystick Y @D,Joystick Switch @E,No Connection @F,No Connection @G,No Connection @H,No Connection @I,No Connection @J,No Connection @K,No Connection @L,No Connection @M
