@@ -118,8 +118,6 @@ class MPU6050(object):
         except OSError:
             raise MPUException(self._I2Cerror)
         chip_id = int(self.buf1[0])
-        if chip_id != self._chip_id:
-            raise ValueError('Bad chip ID retrieved: MPU communication failure')
         return chip_id
 
     @property
@@ -359,3 +357,4 @@ class MPU6050(object):
         self._gyro._ivector[0] = bytes_toint(self.buf6[0], self.buf6[1])
         self._gyro._ivector[1] = bytes_toint(self.buf6[2], self.buf6[3])
         self._gyro._ivector[2] = bytes_toint(self.buf6[4], self.buf6[5])
+
