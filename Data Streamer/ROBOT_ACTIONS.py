@@ -186,10 +186,13 @@ def run_right_motors_only(left_speed, right_speed):
     except:
         pass
 
-def move_servo(angle, base_speed, turn_speed):
+def move_servo(servo_number, angle):
     try:
-        set_servo_angle(machine.PWM(machine.Pin(SERVO_PINS[0])), angle, base_speed, turn_speed)
-    
+        SERVO_PINS[servo_number].freq(50)
+        pulse_width = 500 + (angle / 180) * (2500 - 500)
+        duty = int(pulse_width * 65535 / 20000)  # Convert microseconds to duty cycle (20ms period)
+        
+        SERVO_PINS[servo_number].duty_u16(duty)
     except:
         pass
             
@@ -303,4 +306,5 @@ def read_soil_moisture():
         
 
     
+
 
